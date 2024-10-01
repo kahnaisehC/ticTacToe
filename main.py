@@ -51,9 +51,10 @@ class Game:
         n = len(self._grid)
         print("C ", end="")
         for i in range(0, n):
-            print(i+" ", end=" ")
+            print(i, end=" ")
+        print()
         for i in range(0, n):
-            print(i+" ", end="")
+            print(i, end=" ")
             for j in range(0, n):
                 print(self._grid[i][j]+" ", end="")
             print()
@@ -118,7 +119,7 @@ class Game:
                     ):
                     count = 1
                     continue
-                if self.grid[x+offset][offset] == self[x+offset-1][offset-1]:
+                if self._grid[x+offset][offset] == self._grid[x+offset-1][offset-1]:
                     count += 1
                 else:
                     count = 1
@@ -133,7 +134,7 @@ class Game:
                     ):
                     count = 1
                     continue
-                if self.grid[x-offset][offset] == self[x-offset+1][offset-1]:
+                if self._grid[x-offset][offset] == self._grid[x-offset+1][offset-1]:
                     count += 1
                 else:
                     count = 1
