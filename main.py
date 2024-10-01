@@ -46,6 +46,7 @@ class Game:
         self._grid = create_grid(size)
         self._current_turn = 0
         self._winner = '_'
+        
 
     def get_grid(self):
         return self._grid
@@ -81,9 +82,10 @@ class Game:
             return
 
         # if valid
+        # make the move
         character = 'O'
         if self._current_turn%2 == 0:
-            character = 'X'
+            character = 'X'             # TODO: refactor to be able to select different characters
         self._grid[y][x] = character
         self._current_turn += 1
 
@@ -101,8 +103,8 @@ class Game:
                 else:
                     count = 1
                 if count >= self._line_size:
-                    self._winner = "X"
-                    if self._current_turn%2 == 0: self._winner = "O"
+                    self._winner = "X" 
+                    if self._current_turn%2 == 0: self._winner = "O" # TODO: refactor + characters
                     return False
         
         # check vertical
@@ -117,7 +119,7 @@ class Game:
                 else:
                     count = 1
                 if count >= self._line_size:
-                    self._winner = "X"
+                    self._winner = "X"                              # TODO: refactor + characters
                     if self._current_turn%2 == 0: self._winner = "O"
                     return False
         
@@ -135,7 +137,7 @@ class Game:
                 else:
                     count = 1
                 if count >= self._line_size:
-                    self._winner = "X"
+                    self._winner = "X"                          # TODO: refactor + characters
                     if self._current_turn%2 == 0: self._winner = "O"
                     return False
             
@@ -152,7 +154,7 @@ class Game:
                 else:
                     count = 1
                 if count >= self._line_size:
-                    self._winner = "X"
+                    self._winner = "X"                          # TODO: refactor + characters
                     if self._current_turn%2 == 0: self._winner = "O"
                     return False
         # Check draw
@@ -163,13 +165,12 @@ class Game:
 
 
 g = Game(5, 4)
-
 winner = ""
 while(g.check()):
     g.display_grid()
-    x = int(input("Input the x coordinate: "))
-    y = int(input("Input the y coordinate: "))
-    g.declare_move(int(x), int(y))
+    x = int(input("Input the x coordinate: ")) # funny example of a function not telling that it can crash
+    y = int(input("Input the y coordinate: ")) # TODO: handle exception
+    g.declare_move(x, y)
 
 
 g.display_grid()
