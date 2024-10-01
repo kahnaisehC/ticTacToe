@@ -49,7 +49,11 @@ class Game:
 
     def display_grid(self):
         n = len(self._grid)
+        print("C ", end="")
         for i in range(0, n):
+            print(i+" ", end=" ")
+        for i in range(0, n):
+            print(i+" ", end="")
             for j in range(0, n):
                 print(self._grid[i][j]+" ", end="")
             print()
