@@ -121,6 +121,8 @@ class Game:
                 if count >= self._line_size:
                     return False
             
+        for x in range(0, n):
+            count = 1
             for offset in range(1, n):
                 if (x-offset < 0
                     or self._grid[x-offset][offset] == '_'
@@ -133,7 +135,6 @@ class Game:
                     count = 1
                 if count >= self._line_size:
                     return False
-
             
         return True
 
