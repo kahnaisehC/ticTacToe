@@ -73,7 +73,7 @@ class Game:
            or x >= self._size
            or y < 0
            or y >= self._size
-           or self._grid[x][y] != '_'
+           or self._grid[y][x] != '_'
         ):
             print("invalid move!!")
             self.display_grid
@@ -84,7 +84,7 @@ class Game:
         character = 'O'
         if self._current_turn%2 == 0:
             character = 'X'
-        self._grid[y][y] = character
+        self._grid[y][x] = character
         self._current_turn += 1
 
     def check(self):
@@ -161,7 +161,7 @@ class Game:
         
         return True
 
-        
+
 g = Game(5, 4)
 
 winner = ""
@@ -170,8 +170,10 @@ while(g.check()):
     x = int(input("Input the x coordinate: "))
     y = int(input("Input the y coordinate: "))
     g.declare_move(int(x), int(y))
-    winner = g._grid[x][y]
 
 
 g.display_grid()
-print("THE WINNER IS: " + winner + "!!!!!!")
+if g.get_winner() == '_':
+    print("It's just a boring draw :(")
+else:
+    print("THE WINNER IS: " + g.get_winner() + "!!!!!!")
