@@ -38,26 +38,25 @@ def create_grid(n):
     return grid
 
     
-class Player:
-    def __init__(self, name, character):
-        self._character = character
-        self._name = name
-        self._games_won = 0
-    
-    def set_won_games(self, arg):
-        pass
 
 class Game:
-    def __init__(self, size, lineSize):
+    def __init__(self, size, linesize):
         self._size = size 
-        self._line_size = lineSize
+        self._line_size = linesize
         self._grid = create_grid(size)
         self._current_turn = 0
         self._winner = '_'
 
+    def get_grid(self):
+        return self._grid
+    
+    def get_winner(self):
+        return self._winner
+        
+
     def display_grid(self):
         n = len(self._grid)
-        print("C ", end="")
+        print("c ", end="")
         for i in range(0, n):
             print(i, end=" ")
         print()
