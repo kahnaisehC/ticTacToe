@@ -80,8 +80,9 @@ class Game:
     def play(self):
         while(self.check()):
             self.display_grid()
-            x = input()
-            y = input()
+
+            x = input("Input the x coordinate: ")
+            y = input("Input the y coordinate: ")
             self.declare_move(int(x), int(y))
 
 
