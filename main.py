@@ -106,7 +106,33 @@ class Game:
                     return False
         
         #check diagonal
-        
+        for x in range(0, n):
+            count = 1
+            for offset in range(1, n):
+                if (x+offset >= n
+                    or self._grid[x+offset][offset] == '_'
+                    ):
+                    count = 1
+                    continue
+                if self.grid[x+offset][offset] == self[x+offset-1][offset-1]:
+                    count += 1
+                else:
+                    count = 1
+                if count >= self._line_size:
+                    return False
+            
+            for offset in range(1, n):
+                if (x-offset < 0
+                    or self._grid[x-offset][offset] == '_'
+                    ):
+                    count = 1
+                    continue
+                if self.grid[x-offset][offset] == self[x-offset+1][offset-1]:
+                    count += 1
+                else:
+                    count = 1
+                if count >= self._line_size:
+                    return False
 
             
         return True
