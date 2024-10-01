@@ -31,14 +31,21 @@
 def create_grid(n):
     grid = []
     for i in range(0, n):
-        col = []
+        row = []
         for j in range(0, n):
-            col.append('_')
-        grid.append(col)
+            row.append('_')
+        grid.append(row)
     return grid
 
     
-
+class Player:
+    def __init__(self, name, character):
+        self._character = character
+        self._name = name
+        self._games_won = 0
+    
+    def set_won_games(self, arg):
+        pass
 
 class Game:
     def __init__(self, size, lineSize):
@@ -46,6 +53,7 @@ class Game:
         self._line_size = lineSize
         self._grid = create_grid(size)
         self._current_turn = 0
+        self._winner = '_'
 
     def display_grid(self):
         n = len(self._grid)
@@ -77,23 +85,25 @@ class Game:
         character = 'O'
         if self._current_turn%2 == 0:
             character = 'X'
-        self._grid[x][y] = character
+        self._grid[y][y] = character
         self._current_turn += 1
 
     def check(self):
         n = len(self._grid)
         # check horizontal
-        for col in self._grid:
+        for row in self._grid:
             count = 1
             for i in range(1, n):
-                if col[i] == '_':
+                if row[i] == '_':
                     count = 1
                     continue
-                if col[i] == col[i-1]:
+                if row[i] == row[i-1]:
                     count += 1
                 else:
                     count = 1
                 if count >= self._line_size:
+                    self._winner = "X"
+                    if self._current_turn%2 == 0: self._winner = "O"
                     return False
         
         # check vertical
@@ -108,6 +118,8 @@ class Game:
                 else:
                     count = 1
                 if count >= self._line_size:
+                    self._winner = "X"
+                    if self._current_turn%2 == 0: self._winner = "O"
                     return False
         
         #check diagonal
@@ -124,6 +136,8 @@ class Game:
                 else:
                     count = 1
                 if count >= self._line_size:
+                    self._winner = "X"
+                    if self._current_turn%2 == 0: self._winner = "O"
                     return False
             
         for x in range(0, n):
@@ -139,24 +153,26 @@ class Game:
                 else:
                     count = 1
                 if count >= self._line_size:
+                    self._winner = "X"
+                    if self._current_turn%2 == 0: self._winner = "O"
                     return False
-            
+        # Check draw
+        if self._current_turn == self._size**2:
+            return False
+        
         return True
 
-    def play(self):
-        winner = ""
-        while(self.check()):
-            self.display_grid()
-            x = int(input("Input the x coordinate: "))
-            y = int(input("Input the y coordinate: "))
-            self.declare_move(int(x), int(y))
-            winner = self._grid[x][y]
-        self.display_grid()
-        print("THE WINNER IS: " + winner + "!!!!!!")
-
-
-        
         
 g = Game(5, 4)
 
-g.play()
+winner = ""
+while(g.check()):
+    g.display_grid()
+    x = int(input("Input the x coordinate: "))
+    y = int(input("Input the y coordinate: "))
+    g.declare_move(int(x), int(y))
+    winner = g._grid[x][y]
+
+
+g.display_grid()
+print("THE WINNER IS: " + winner + "!!!!!!")
