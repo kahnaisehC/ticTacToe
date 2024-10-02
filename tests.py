@@ -1,19 +1,26 @@
 import unittest
-import logging
 from main import Game 
 
 class TestGame(unittest.TestCase):
-
-    def test_display_grid(self):
+    def test_grid(self):
         g = Game(3,3)
-        g.display_grid
-        with self.assertLogs('foo', level="DEBUG") as cm:
-            g.display_grid()
+        self.assertEqual(g.get_grid(), [['_', '_', '_'],
+                                          ['_', '_', '_'],
+                                          ['_', '_', '_']])
+        g.declare_move(0, 0)
+        self.assertEqual(g.get_grid(), [['X', '_', '_'],
+                                          ['_', '_', '_'],
+                                          ['_', '_', '_']])
         
-        self.assertEqual(cm.output, ['C 0 1 2',
-                                     '0 _ _ _',
-                                     '1 _ _ _',
-                                     '2 _ _ _'])
+    def test_diagonal_check(self):
+        g = Game(3, 3)
 
+        self.assertTrue(g.check())
+        g.declare_move(0, 0)
+        g.declare_move(0, 1)
+        g.declare_move(1, 1)
+        g.declare_move(0,2)
+        g.declare_move(2, 2)
+        self.assertFalse(g.check())
 
 unittest.main()

@@ -163,18 +163,17 @@ class Game:
         
         return True
 
+# g = Game(5, 4)
+# winner = ""
+# while(g.check()):
+#     g.display_grid()
+#     x = int(input("Input the x coordinate: ")) # funny example of a function not telling that it can crash
+#     y = int(input("Input the y coordinate: ")) # TODO: handle exception
+#     g.declare_move(x, y)
 
-g = Game(5, 4)
-winner = ""
-while(g.check()):
-    g.display_grid()
-    x = int(input("Input the x coordinate: ")) # funny example of a function not telling that it can crash
-    y = int(input("Input the y coordinate: ")) # TODO: handle exception
-    g.declare_move(x, y)
 
-
-g.display_grid()
-if g.get_winner() == '_':
-    print("It's just a boring draw :(")
-else:
-    print("THE WINNER IS: " + g.get_winner() + "!!!!!!")
+# g.display_grid()
+# if g.get_winner() == '_':
+#     print("It's just a boring draw :(")
+# else:
+#     print("THE WINNER IS: " + g.get_winner() + "!!!!!!")
