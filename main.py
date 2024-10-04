@@ -28,6 +28,29 @@
 
 # https://neetcode.io/courses/ood-interview/0
 
+def normal(self, x, y, grid):
+        # if not valid
+        # rerun the function
+        x = int(input("Input the x coordinate: ")) # funny example of a function not telling that it can crash
+        y = int(input("Input the y coordinate: ")) # TODO: handle exception
+        if(x < 0 
+           or x >= len(grid[0])
+           or y < 0
+           or y >= len(grid) 
+           or grid[y][x] != '_'
+        ):
+            print("invalid move!!")
+            return
+
+        # if valid
+        # make the move
+        grid[y][x] = self.character
+        return grid
+
+PLAYING_ALGORITHMS = {
+    "default": normal
+}
+
 def create_grid(n):
     grid = []
     for i in range(0, n):
@@ -37,8 +60,14 @@ def create_grid(n):
         grid.append(row)
     return grid
 
-    
-
+class Player:
+    def __init__(self, name, desc="Lorem ipsum", character="X", type="default"):
+        self.name = name
+        self.desc = desc    
+        self.character = character
+        # sets the "move" method to the value mapped in the PLAYING_ALGORITHMS
+        # map with the key whose value is type
+        setattr(self, "move", PLAYING_ALGORITHMS[type].__get__(self, self.__class__))
 class Game:
     def __init__(self, size, linesize):
         self._size = size 
@@ -162,18 +191,3 @@ class Game:
             return False
         
         return True
-
-# g = Game(5, 4)
-# winner = ""
-# while(g.check()):
-#     g.display_grid()
-#     x = int(input("Input the x coordinate: ")) # funny example of a function not telling that it can crash
-#     y = int(input("Input the y coordinate: ")) # TODO: handle exception
-#     g.declare_move(x, y)
-
-
-# g.display_grid()
-# if g.get_winner() == '_':
-#     print("It's just a boring draw :(")
-# else:
-#     print("THE WINNER IS: " + g.get_winner() + "!!!!!!")
